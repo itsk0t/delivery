@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Address;
 use app\models\Category;
 use app\models\Products;
 use app\models\SignupForm;
@@ -157,5 +158,21 @@ class SiteController extends Controller
         $products = Products::find()->all();
         $category = Category::find()->where(['id'=>$_GET['id']])->asArray()->one();
         return $this->render('products', ['category'=>$category, 'products' => $products]);
+    }
+
+    public function actionAccount()
+    {
+        $myaddress = Address::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
+        $model = new Address();
+
+        if($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            if ($model->save())
+            {
+                Yii::$app->session->setFlash('success', 'Адрес добавлен.');
+                return $this->refresh();
+            }
+        }
+        return $this->render('account', compact('myaddress', 'model'));
     }
 }

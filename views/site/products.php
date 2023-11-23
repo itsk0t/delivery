@@ -4,7 +4,7 @@
 
 //use yii\bootstrap5\LinkPager;
 
-$this->title = '<?php echo $category->name?>';
+$this->title = '';
 ?>
 <div class="site-index">
     <div class="d-flex justify-content-between mt-4 card-group">

@@ -107,8 +107,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return \Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        return $this->is_admin === 1;
+        return $this->role === 1;
     }
 }

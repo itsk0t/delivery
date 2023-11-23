@@ -8,7 +8,12 @@ use Yii;
  * This is the model class for table "address".
  *
  * @property int $id
- * @property string $body
+ * @property string $city
+ * @property string $street
+ * @property string $house
+ * @property int $entrance
+ * @property int $floor
+ * @property int $apartment
  * @property int $user_id
  *
  * @property Account[] $accounts
@@ -30,9 +35,11 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['body', 'user_id'], 'required'],
-            [['user_id'], 'integer'],
-            [['body'], 'string', 'max' => 256],
+            [['city', 'street', 'house', 'entrance', 'floor', 'apartment'], 'required'],
+            [['entrance', 'floor', 'apartment'], 'integer'],
+            ['user_id', 'default', 'value'=>Yii::$app->user->getId()],
+            [['city', 'street'], 'string', 'max' => 64],
+            [['house'], 'string', 'max' => 11],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -44,7 +51,12 @@ class Address extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'body' => 'Body',
+            'city' => 'Город',
+            'street' => 'Улица',
+            'house' => 'Дом',
+            'entrance' => 'Подъезд',
+            'floor' => 'Этаж',
+            'apartment' => 'Квартира',
             'user_id' => 'User ID',
         ];
     }
