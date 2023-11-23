@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\Products;
 use app\models\SignupForm;
 use Yii;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -63,8 +65,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $category = Category::find()->all();
-        return $this->render('index', ['category'=>$category]);
+        $query = Category::find();
+        $count = clone $query;
+        $pages = new Pagination(['totalCount'=>$count->count(), 'pageSize'=>4]);
+
+        $category = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return $this->render('index', ['category'=>$category, 'pages'=>$pages]);
     }
 
     /**
@@ -142,5 +150,12 @@ class SiteController extends Controller
         }
 
         return $this->render('signup', compact('model'));
+    }
+
+    public function actionProducts()
+    {
+        $products = Products::find()->all();
+        $category = Category::find()->where(['id'=>$_GET['id']])->asArray()->one();
+        return $this->render('products', ['category'=>$category, 'products' => $products]);
     }
 }
