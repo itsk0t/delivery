@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Address;
 use app\models\Category;
+use app\models\Discount;
 use app\models\Products;
 use app\models\SignupForm;
 use Yii;
@@ -174,5 +175,17 @@ class SiteController extends Controller
             }
         }
         return $this->render('account', compact('myaddress', 'model'));
+    }
+
+    public function actionDiscount()
+    {
+        $query = Discount::find();
+        $count = clone $query;
+        $pages = new Pagination(['totalCount'=>$count->count(), 'pageSize'=>4]);
+
+        $discount = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return $this->render('discount', ['discount'=>$discount, 'pages'=>$pages]);
     }
 }

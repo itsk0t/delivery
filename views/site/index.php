@@ -7,7 +7,7 @@ use yii\bootstrap5\LinkPager;
 $this->title = 'Меню';
 ?>
 <div class="site-index">
-    <div class="d-flex justify-content-between mt-4 card-group">
+    <div class="d-flex justify-content-between mt-4 ">
         <?php foreach ($category as $el) {
             if ($el->stop == 1) { ?>
                 <div class="card shadow m-2 rounded-1" style="width: 18rem;">

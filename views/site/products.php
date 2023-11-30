@@ -19,7 +19,7 @@ $this->title = '';
                         <div class="card-body">
                             <h5 class="card-title text-center h3"><?php echo $el['name'] ?></h5>
                             <p class="card-text"><?php echo $el['body'] ?></p>
-                            <p class="card-text">Цена: <?php echo $el['price'] ?> &#8381;</p>
+                            <p class="card-text">Цена: <?php echo $el['price'] * $el->discount->percent ?> &#8381;</p>
                             <a href="#"
                                class="btn btn-primary w-100  mt-2">В корзину</a>
                         </div>

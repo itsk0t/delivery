@@ -91,4 +91,15 @@ class Applications extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case 0: return 'Оформляется';
+            case 1: return 'Готовится';
+            case 2: return 'На сборке';
+            case 3: return 'В пути';
+            case 4: return 'Отказ';
+        }
+    }
 }
