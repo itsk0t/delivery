@@ -1,82 +1,101 @@
 <?php
-
 namespace app\models;
 
+use yii\base\Model;
 use Yii;
 
-/**
- * This is the model class for table "basket".
- *
- * @property int $id
- * @property int $user_id
- * @property int $product_id
- *
- * @property Applications[] $applications
- * @property Products $product
- * @property User $user
- */
-class Basket extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'basket';
+class Basket extends Model {
+
+    public function addToBasket($id, $count = 1) {
+        $count = (int)$count;
+        if ($count < 1) {
+            return;
+        }
+        $id = abs((int)$id);
+        $product = Products::findOne($id);
+        if (empty($product)) {
+            return;
+        }
+        if ($count > 10) {
+            $count = 10;
+        }
+        $session = Yii::$app->session;
+        $session->open();
+        if (!$session->has('basket')) {
+            $session->set('basket', []);
+            $basket = [];
+        } else {
+            $basket = $session->get('basket');
+        }
+        if (isset($basket['products'][$product->id])) { // такой товар уже есть?
+            $count = $basket['products'][$product->id]['count'] + $count;
+            if ($count > 100) {
+                $count = 100;
+            }
+            $basket['products'][$product->id]['count'] = $count;
+        } else { // такого товара еще нет
+            $basket['products'][$product->id]['name'] = $product->name;
+            $basket['products'][$product->id]['price'] = $product->price;
+            $basket['products'][$product->id]['count'] = $count;
+        }
+        $amount = 0.0;
+        foreach ($basket['products'] as $item) {
+            $amount = $amount + $item['price'] * $item['count'];
+        }
+        $basket['amount'] = $amount;
+        $session->set('basket', $basket);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['user_id', 'product_id'], 'required'],
-            [['user_id', 'product_id'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::class, 'targetAttribute' => ['product_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-        ];
+
+    public function removeFromBasket($id) {
+        $id = abs((int)$id);
+        $session = Yii::$app->session;
+        $session->open();
+        if (!$session->has('basket')) {
+            return;
+        }
+        $basket = $session->get('basket');
+        if (!isset($basket['products'][$id])) {
+            return;
+        }
+        unset($basket['products'][$id]);
+        if (count($basket['products']) == 0) {
+            $session->set('basket', []);
+            return;
+        }
+        $amount = 0.0;
+        foreach ($basket['products'] as $item) {
+            $amount = $amount + $item['price'] * $item['count'];
+        }
+        $basket['amount'] = $amount;
+
+        $session->set('basket', $basket);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'product_id' => 'Product ID',
-        ];
+
+    public function getBasket() {
+        $session = Yii::$app->session;
+        $session->open();
+        if (!$session->has('basket')) {
+            $session->set('basket', []);
+            return [];
+        } else {
+            return $session->get('basket');
+        }
     }
 
-    /**
-     * Gets query for [[Applications]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getApplications()
-    {
-        return $this->hasMany(Applications::class, ['basket_id' => 'id']);
+
+    public function clearBasket() {
+        $session = Yii::$app->session;
+        $session->open();
+        $session->set('basket', []);
     }
 
-    /**
-     * Gets query for [[Product]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProduct()
-    {
-        return $this->hasOne(Products::class, ['id' => 'product_id']);
-    }
 
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+    public function updateBasket($data) {
+        $this->clearBasket();
+        foreach ($data['count'] as $id => $count) {
+            $this->addToBasket($id, $count);
+        }
     }
 }

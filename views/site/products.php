@@ -4,6 +4,9 @@
 
 //use yii\bootstrap5\LinkPager;
 
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 $this->title = '';
 ?>
 <div class="site-index">
@@ -20,8 +23,21 @@ $this->title = '';
                             <h5 class="card-title text-center h3"><?php echo $el['name'] ?></h5>
                             <p class="card-text"><?php echo $el['body'] ?></p>
                             <p class="card-text">Цена: <?php echo $el['price'] * $el->discount->percent ?> &#8381;</p>
-                            <a href="#"
-                               class="btn btn-primary w-100  mt-2">В корзину</a>
+                            <form method="post"
+                                  action="<?= Url::to(['basket/add']); ?>">
+                                <input type="hidden" name="id"
+                                       value="<?= $el['id']; ?>">
+                                <?=
+                                Html::hiddenInput(
+                                    Yii::$app->request->csrfParam,
+                                    Yii::$app->request->csrfToken
+                                );
+                                ?>
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Добавить в корзину
+                                </button>
+                            </form>
                         </div>
                     </div>
                 <?php } else {

@@ -41,6 +41,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Discount', 'url' => ['/site/discount']],
+            ['label' => 'Basket', 'url' => ['/basket/index']],
 //            ['label' => 'About', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (''): (Yii::$app->user->identity->isAdmin() ? (['label' => 'Admin', 'url' => ['/admin']]) :
