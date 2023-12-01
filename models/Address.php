@@ -9,12 +9,10 @@ use Yii;
  *
  * @property int $id
  * @property string $body
- * @property int $entrance
- * @property int $floor
- * @property int $apartment
  * @property int $user_id
  *
  * @property Account[] $accounts
+ * @property Orders[] $orders
  * @property User $user
  */
 class Address extends \yii\db\ActiveRecord
@@ -33,9 +31,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['body', 'entrance', 'floor', 'apartment'], 'required'],
-            [['entrance', 'floor', 'apartment'], 'integer'],
-            ['user_id', 'default', 'value'=>Yii::$app->user->getId()],
+            [['body', 'user_id'], 'required'],
             [['body'], 'string', 'max' => 256],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -49,9 +45,6 @@ class Address extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'body' => 'Body',
-            'entrance' => 'Entrance',
-            'floor' => 'Floor',
-            'apartment' => 'Apartment',
             'user_id' => 'User ID',
         ];
     }
@@ -64,6 +57,16 @@ class Address extends \yii\db\ActiveRecord
     public function getAccounts()
     {
         return $this->hasMany(Account::class, ['address_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Orders]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrders()
+    {
+        return $this->hasMany(Orders::class, ['address_id' => 'id']);
     }
 
     /**

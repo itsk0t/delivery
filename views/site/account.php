@@ -5,10 +5,7 @@
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th>Адрес (улица, дом)</th>
-        <th>Подъезд</th>
-        <th>Этаж</th>
-        <th>Квартира</th>
+        <th>Адрес (Улица, дом, подъезд, этаж, квартира)</th>
     </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -16,9 +13,6 @@
         <tr>
             <th scope="row"><?php echo $el['id'] ?></th>
             <td><?php echo $el['body'] ?></td>
-            <td><?php echo $el['entrance'] ?></td>
-            <td><?php echo $el['floor'] ?></td>
-            <td><?php echo $el['apartment'] ?></td>
         </tr>
     <?php } ?>
     </tbody>
@@ -43,7 +37,6 @@
                     use yii\widgets\ActiveForm;
 
                     /** @var yii\web\View $this */
-                    /** @var app\models\Applications $model */
                     /** @var ActiveForm $form */
                     ?>
                     <div class="site-proposal">
@@ -51,12 +44,6 @@
                         <?php $form = ActiveForm::begin(); ?>
 
                         <?= $form->field($model, 'body')->textInput(['autofocus' => true]) ?>
-
-                        <?= $form->field($model, 'entrance')->textInput() ?>
-
-                        <?= $form->field($model, 'floor')->textInput() ?>
-
-                        <?= $form->field($model, 'apartment')->textInput() ?>
 
                         <div class="form-group">
                             <?= Html::submitButton(Yii::t('app', 'Добавить'), ['class' => 'btn btn-primary']) ?>
