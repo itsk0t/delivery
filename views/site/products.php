@@ -33,7 +33,7 @@ $this->title = '';
                                     Yii::$app->request->csrfToken
                                 );
                                 ?>
-                                <button type="submit" class="btn btn-warning">
+                                <button type="submit" class="btn btn-warning w-100">
                                     <i class="fa fa-shopping-cart"></i>
                                     Добавить в корзину
                                 </button>

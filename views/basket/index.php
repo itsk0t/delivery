@@ -39,9 +39,7 @@ use yii\helpers\Url;
                                     <?php foreach ($basket['products'] as $id => $item): ?>
                                         <tr>
                                             <td>
-                                                <a href="<?= Url::to(['catalog/product', 'id' => $id]); ?>">
-                                                    <?= Html::encode($item['name']); ?>
-                                                </a>
+                                                <p><?php echo $item['name'] ?></p>
                                             </td>
                                             <td class="text-right">
                                                 <?=

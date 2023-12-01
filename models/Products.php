@@ -92,4 +92,12 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Discount::class, ['id' => 'discount_id']);
     }
+
+    public function getStop()
+    {
+        switch ($this->stop) {
+            case 1: return 'В продаже';
+            case 0: return 'Приостановлен';
+        }
+    }
 }

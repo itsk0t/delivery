@@ -58,4 +58,12 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Products::class, ['category_id' => 'id']);
     }
+
+    public function getStop()
+    {
+        switch ($this->stop) {
+            case 1: return 'В продаже';
+            case 2: return 'Приостановлен';
+        }
+    }
 }
