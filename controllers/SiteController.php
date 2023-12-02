@@ -28,10 +28,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout'],
+                'only' => ['logout', 'account'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['account'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -92,7 +97,10 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if (Yii::$app->user->identity->isAdmin()) {
+                return $this->redirect(['admin/']);
+            }
+            return $this->redirect(['site/index']);
         }
 
         $model->password = '';
@@ -183,13 +191,7 @@ class SiteController extends Controller
 
     public function actionDiscount()
     {
-        $query = Discount::find();
-        $count = clone $query;
-        $pages = new Pagination(['totalCount'=>$count->count(), 'pageSize'=>4]);
-
-        $discount = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-        return $this->render('discount', ['discount'=>$discount, 'pages'=>$pages]);
+        $discount = Discount::find()->all();
+        return $this->render('discount', ['discount'=>$discount]);
     }
 }

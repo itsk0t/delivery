@@ -51,7 +51,7 @@ use yii\helpers\Url;
                                                 );
                                                 ?>
                                             </td>
-                                            <td class="text-right"><?= $item['price']; ?></td>
+                                            <td class="text-right"><?= $item['price'] ?></td>
                                             <td class="text-right"><?= $item['price'] * $item['count']; ?></td>
                                             <td>
                                                 <a href="<?= Url::to(['basket/remove', 'id' => $id]); ?>" class="text-danger">

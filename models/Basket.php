@@ -65,7 +65,7 @@ class Basket extends Model {
         }
         $amount = 0.0;
         foreach ($basket['products'] as $item) {
-            $amount = $amount + $item['price'] * $item['count'];
+            $amount = $amount + $item['price']*$item['discount'] * $item['count'];
         }
         $basket['amount'] = $amount;
 

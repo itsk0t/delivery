@@ -13,6 +13,7 @@ use yii\filters\VerbFilter;
  */
 class DatetableController extends Controller
 {
+    public $layout = 'admin';
     /**
      * @inheritDoc
      */
