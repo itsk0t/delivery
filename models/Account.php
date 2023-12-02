@@ -9,11 +9,11 @@ use Yii;
  *
  * @property int $id
  * @property int $user_id
- * @property int $application_id
  * @property int $address_id
+ * @property int $order_id
  *
  * @property Address $address
- * @property Applications $application
+ * @property Orders $order
  * @property User $user
  */
 class Account extends \yii\db\ActiveRecord
@@ -32,11 +32,11 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'application_id', 'address_id'], 'required'],
-            [['user_id', 'application_id', 'address_id'], 'integer'],
+            [['user_id', 'address_id', 'order_id'], 'required'],
+            [['user_id', 'address_id', 'order_id'], 'integer'],
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::class, 'targetAttribute' => ['address_id' => 'id']],
-            [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => Applications::class, 'targetAttribute' => ['application_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Orders::class, 'targetAttribute' => ['order_id' => 'id']],
         ];
     }
 
@@ -48,8 +48,8 @@ class Account extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'application_id' => 'Application ID',
             'address_id' => 'Address ID',
+            'order_id' => 'Order ID',
         ];
     }
 
@@ -64,13 +64,13 @@ class Account extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Application]].
+     * Gets query for [[Order]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getApplication()
+    public function getOrder()
     {
-        return $this->hasOne(Applications::class, ['id' => 'application_id']);
+        return $this->hasOne(Orders::class, ['id' => 'order_id']);
     }
 
     /**

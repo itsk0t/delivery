@@ -1,23 +1,54 @@
 <h1>Account</h1>
 
-<h4>Your address</h4>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th>Адрес (Улица, дом, подъезд, этаж, квартира)</th>
-    </tr>
-    </thead>
-    <tbody class="table-group-divider">
-    <?php foreach ($myaddress as $el) { ?>
-        <tr>
-            <th scope="row"><?php echo $el['id'] ?></th>
-            <td><?php echo $el['body'] ?></td>
-        </tr>
-    <?php } ?>
-    </tbody>
-</table>
+<div>
+    <h4>Your orders</h4>
+    <div>
+        <?php foreach ($myorders as $item) { ?>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Заказ №-<?php echo $item['id'] ?>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <p class="card-text"><b>В заказе:</b></p>
+                        <ol>
+                            <?php foreach ($myordersitems as $elor) { if ($item['id'] == $elor['order_id']) {?>
+                                <li><?php echo $elor['name'] . ' ' . $elor['quantity'] . 'шт. ' . $elor['price']*$elor['quantity']?>  &#8381;</li>
+                            <?php } else { continue;} } ?>
+                        </ol>
+                    </div>
 
+                    <p class="card-text"><b>Адрес заказа:</b> <?php echo $item->address->body ?></p>
+                    <p class="card-text"><b>Сумма заказа:</b> <?php echo $item['amount'] ?> &#8381;</p>
+                    <p class="card-text"><b>Время заказа:</b> <?php echo $item['created'] ?></p>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+
+<div>
+    <h4>Your address</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>Адрес (Улица, дом, подъезд, этаж, квартира)</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <?php foreach ($myaddress as $el) { ?>
+            <tr>
+                <th scope="row"><?php echo $el['id'] ?></th>
+                <td><?php echo $el['body'] ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+
+<!--Модальное окно-->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Create address
 </button>

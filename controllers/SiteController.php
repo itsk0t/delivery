@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Address;
 use app\models\Category;
 use app\models\Discount;
+use app\models\OrderItems;
+use app\models\Orders;
 use app\models\Products;
 use app\models\SignupForm;
 use Yii;
@@ -164,6 +166,8 @@ class SiteController extends Controller
     public function actionAccount()
     {
         $myaddress = Address::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
+        $myorders = Orders::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
+        $myordersitems = OrderItems::find()->all();
         $model = new Address();
 
         if($model->load(Yii::$app->request->post()) && $model->validate())
@@ -174,7 +178,7 @@ class SiteController extends Controller
                 return $this->refresh();
             }
         }
-        return $this->render('account', compact('myaddress', 'model'));
+        return $this->render('account', ['model'=>$model, 'myaddress'=>$myaddress, 'myorders'=>$myorders, 'myordersitems'=>$myordersitems]);
     }
 
     public function actionDiscount()

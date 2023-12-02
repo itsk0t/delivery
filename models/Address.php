@@ -31,8 +31,9 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['body', 'user_id'], 'required'],
+            [['body'], 'required'],
             [['body'], 'string', 'max' => 256],
+            ['user_id', 'default', 'value' => Yii::$app->user->getId()],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }

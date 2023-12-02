@@ -103,4 +103,26 @@ class Orders extends ActiveRecord {
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case 0: return 'Обрабатывается';
+            case 1: return 'Готовится';
+            case 2: return 'Собирается';
+            case 3: return 'В пути';
+            case 4: return 'Отменен';
+        }
+    }
+
+    public function getColor()
+    {
+        switch ($this->status) {
+            case 0: return '-warning';
+            case 1: return '-success';
+            case 2: return '-primary';
+            case 3: return '-info';
+            case 4: return '-danger';
+        }
+    }
 }
