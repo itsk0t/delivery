@@ -21,7 +21,7 @@ if (Yii::$app->session->hasFlash('checkout-data')) {
     $data = Yii::$app->session->getFlash('checkout-data');
     $name = Html::encode($data['name']);
     $phone = Html::encode($data['phone']);
-    $address = Html::encode($data['address']);
+    $address = Html::encode($data['address_id']);
     $comment = Html::encode($data['comments']);
 }
 ?>
@@ -66,9 +66,9 @@ if (Yii::$app->session->hasFlash('checkout-data')) {
 
                         echo $form->field($order, 'phone')->textInput(['value' => $phone])->widget(\yii\widgets\MaskedInput::class, ['mask' => '8-(999)-999-99-99']);
 
-                        echo $form->field($order, 'address')->textarea(['rows' => 2, 'value' => $address]);
+                        echo $form->field($order, 'address_id')->textInput()->dropDownList(\yii\helpers\ArrayHelper::map(\app\models\Address::find()->all(), 'id', 'body'));
 
-                        echo $form->field($order, 'comment')->textarea(['rows' => 2, 'value' => $comment]);
+                        echo $form->field($order, 'comments')->textarea(['value' => $comment]);
 
                         echo Html::submitButton(
                             'Оформить заказ',
