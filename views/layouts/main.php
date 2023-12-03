@@ -32,27 +32,29 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => '<img src="image/logo1.png" style="display: inline; vertical-align: top; height:32px;">   BeaverDelivery',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Discount', 'url' => ['/site/discount']],
-            ['label' => 'Basket', 'url' => ['/basket/index']],
-//            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Меню', 'url' => ['/site/index']],
+            ['label' => 'Акции', 'url' => ['/site/discount']],
+//            ['label' => 'Корзина', 'url' => ['/basket/index']],
+            Yii::$app->user->isGuest ? (''): (Yii::$app->user->identity->isAdmin() ? (['label' => 'Admin', 'url' => ['/basket/index']]) :
+                (['label' => 'Корзина', 'url' => ['/basket/index']])),
+            ['label' => 'О компании', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (''): (Yii::$app->user->identity->isAdmin() ? (['label' => 'Admin', 'url' => ['/admin']]) :
-                (['label' => 'Account', 'url' => ['/site/account']])),
-            ['label' => 'Register', 'url' => ['site/signup'], 'visible' => Yii::$app->user->isGuest],
+                (['label' => 'Личный кабинет', 'url' => ['/site/account']])),
+            ['label' => 'Зарегистрироваться', 'url' => ['site/signup'], 'visible' => Yii::$app->user->isGuest],
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
+                ? ['label' => 'Войти', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Выйти (' . Yii::$app->user->identity->username . ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()

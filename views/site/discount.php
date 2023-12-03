@@ -1,3 +1,10 @@
+<?php
+
+/** @var yii\web\View $this */
+
+$this->title = 'Акции';
+?>
+
 <div class="d-flex justify-content-center">
     <?php use yii\bootstrap5\LinkPager;
 
@@ -13,7 +20,7 @@
                     </div>
                     <p class="card-text"><?php echo $el['body'] ?></p>
                     <p class="card-text"><?php echo $el['deadline'] ?></p>
-                    <a href="#" class="btn btn-primary">Перейти в меню</a>
+                    <a href="<?php echo \yii\helpers\Url::toRoute(['site/index'])?>" class="btn btn-warning">Перейти в меню</a>
                 </div>
             </div>
         <?php } else {

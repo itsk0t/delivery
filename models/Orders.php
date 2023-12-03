@@ -118,10 +118,10 @@ class Orders extends ActiveRecord {
     public function getColor()
     {
         switch ($this->status) {
-            case 0: return '-warning';
-            case 1: return '-success';
-            case 2: return '-primary';
-            case 3: return '-info';
+            case 0: return '25';
+            case 1: return '50';
+            case 2: return '75';
+            case 3: return '100';
             case 4: return '-danger';
         }
     }

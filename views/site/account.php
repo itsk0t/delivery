@@ -1,7 +1,14 @@
-<h1>Account</h1>
+<?php
+
+/** @var yii\web\View $this */
+
+$this->title = 'Личный кабинет';
+?>
+
+<h1>Личный кабинет</h1>
 
 <div>
-    <h4>Your orders</h4>
+    <h4>Ваши заказы:</h4>
     <div>
         <?php foreach ($myorders as $item) { ?>
             <div class="card mb-3">
@@ -21,14 +28,17 @@
                     <p class="card-text"><b>Адрес заказа:</b> <?php echo $item->address->body ?></p>
                     <p class="card-text"><b>Сумма заказа:</b> <?php echo $item['amount'] ?> &#8381;</p>
                     <p class="card-text"><b>Время заказа:</b> <?php echo $item['created'] ?></p>
-                    <p class="card-text"><b>Статус заказа:</b> <?php echo $item->getStatus()?></p>
                     <?php if ($item->status != 4) { ?>
-                        <div class="spinner-border text<?php echo $item->getColor() ?>" role="status">
-                            <span class="visually-hidden">Загрузка...</span>
+                        <p class="card-text"><b>Статус заказа:</b> <?php echo $item->getStatus()?></p>
+                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="<?php echo $item->getColor() ?>" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width: <?php echo $item->getColor() ?>%"></div>
                         </div>
+                        <button type="button" class="btn btn-danger mt-4">&#215; Отказаться</button>
                     <?php } else { ?>
-                        <div class="spinner-grow text<?php echo $item->getColor() ?>" role="status">
-                            <span class="visually-hidden">Загрузка...</span>
+                        <div class="card text-bg<?php echo $item->getColor() ?> mb-3" style="max-width: 18rem;">
+                            <div class="card-body">
+                                <p class="card-text"><b>Статус заказа:</b> <?php echo $item->getStatus()?></p>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>
@@ -38,7 +48,7 @@
 </div>
 
 <div>
-    <h4>Your address</h4>
+    <h4>Ваши адрса:</h4>
     <table class="table">
         <thead>
         <tr>
@@ -60,7 +70,7 @@
 
 <!--Модальное окно-->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Create address
+    Добавить адрес
 </button>
 
 <div>

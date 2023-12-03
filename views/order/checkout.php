@@ -24,6 +24,8 @@ if (Yii::$app->session->hasFlash('checkout-data')) {
     $address = Html::encode($data['address_id']);
     $comment = Html::encode($data['comments']);
 }
+
+$this->title = 'Оформление заказа';
 ?>
 
 <section>
