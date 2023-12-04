@@ -30,7 +30,7 @@ $this->title = 'Меню';
                             <div class="card-body d-flex justify-content-between flex-column">
                                 <h5 class="card-title text-center h3"><?php echo $el['name'] ?></h5>
                                 <p class="card-text"><?php echo $el['body'] ?></p>
-                                <p class="card-text">Цена: <b><?php echo $el['price'] * $el->discount->percent ?>
+                                <p class="card-text">Цена: <b><?php echo $el['price']?>
                                         &#8381;</b></p>
                                 <div>
                                     <?php if (Yii::$app->user->isGuest) { ?>

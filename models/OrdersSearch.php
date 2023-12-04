@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Datetable;
+use app\models\Orders;
 
 /**
- * DatetableSearch represents the model behind the search form of `app\models\Datetable`.
+ * OrdersSearch represents the model behind the search form of `app\models\Orders`.
  */
-class DatetableSearch extends Datetable
+class OrdersSearch extends Orders
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class DatetableSearch extends Datetable
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'working_hours'], 'safe'],
+            [['id', 'user_id', 'address_id', 'amount', 'status'], 'integer'],
+            [['name', 'phone', 'comments', 'created', 'updated'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class DatetableSearch extends Datetable
      */
     public function search($params)
     {
-        $query = Datetable::find();
+        $query = Orders::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,17 @@ class DatetableSearch extends Datetable
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
+            'address_id' => $this->address_id,
+            'amount' => $this->amount,
+            'created' => $this->created,
+            'updated' => $this->updated,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'working_hours', $this->working_hours]);
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'comments', $this->comments]);
 
         return $dataProvider;
     }

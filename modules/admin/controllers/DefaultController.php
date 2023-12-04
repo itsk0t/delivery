@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\AdminDecoration;
 use app\models\ContactForm;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -42,6 +43,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $dec = AdminDecoration::find()->all();
+        return $this->render('index', ['dec' => $dec]);
     }
 }

@@ -14,12 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'body')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'entrance')->textInput() ?>
-
-    <?= $form->field($model, 'floor')->textInput() ?>
-
-    <?= $form->field($model, 'apartment')->textInput() ?>
-
     <?= $form->field($model, 'user_id')->textInput() ?>
 
     <div class="form-group">

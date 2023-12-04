@@ -5,20 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "datetable".
+ * This is the model class for table "admin_decoration".
  *
  * @property int $id
- * @property string $name
- * @property string $working_hours
+ * @property string $image
+ * @property string $link
  */
-class Datetable extends \yii\db\ActiveRecord
+class AdminDecoration extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'datetable';
+        return 'admin_decoration';
     }
 
     /**
@@ -27,8 +27,9 @@ class Datetable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'working_hours'], 'required'],
-            [['name', 'working_hours'], 'string', 'max' => 32],
+            [['image', 'link'], 'required'],
+            [['image'], 'string', 'max' => 64],
+            [['link'], 'string', 'max' => 256],
         ];
     }
 
@@ -39,8 +40,8 @@ class Datetable extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'working_hours' => 'Working Hours',
+            'image' => 'Image',
+            'link' => 'Link',
         ];
     }
 }

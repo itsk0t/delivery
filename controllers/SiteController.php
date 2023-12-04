@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Address;
 use app\models\Category;
+use app\models\Datetable;
 use app\models\Discount;
 use app\models\OrderItems;
 use app\models\Orders;
@@ -140,7 +141,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $datetable = Datetable::find()->all();
+        return $this->render('about', ['datetable' => $datetable]);
     }
 
     public function actionSignup()

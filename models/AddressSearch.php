@@ -17,7 +17,7 @@ class AddressSearch extends Address
     public function rules()
     {
         return [
-            [['id', 'entrance', 'floor', 'apartment', 'user_id'], 'integer'],
+            [['id', 'user_id'], 'integer'],
             [['body'], 'safe'],
         ];
     }
@@ -59,9 +59,6 @@ class AddressSearch extends Address
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'entrance' => $this->entrance,
-            'floor' => $this->floor,
-            'apartment' => $this->apartment,
             'user_id' => $this->user_id,
         ]);
 

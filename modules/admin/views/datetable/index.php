@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\DatetableSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Расписание работы';
+$this->title = 'Время работы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="datetable-index">
@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'weekdays',
-            'weekend',
+            'name',
+            'working_hours',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Datetable $model, $key, $index, $column) {

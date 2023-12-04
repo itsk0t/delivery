@@ -14,6 +14,9 @@ $this->title = 'О комании';
         </div>
         <div style="width: 50px;"></div>
         <div>
+            <?php foreach ($datetable as $el) { ?>
+                <p><b><?php echo $el['name'] . '</b> ' . $el['working_hours'] ?></p>
+            <?php }?>
             <p style="text-align: justify;">
                 <b>"Beaver Delivery"</b> - ваш надежный партнер в мире вкусной еды! Наш ресторан предлагает широкий выбор блюд.
                 Мы гордимся тем, что используем только свежие и качественные ингредиенты, чтобы подарить вам незабываемый вкус и
