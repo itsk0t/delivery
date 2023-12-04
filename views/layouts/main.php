@@ -34,7 +34,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     NavBar::begin([
         'brandLabel' => '<img src="image/logo1.png" style="display: inline; vertical-align: top; height:32px;">   BeaverDelivery',
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        'options' => ['class' => 'navbar navbar-expand-md fixed-top', 'style' => 'background: #FCC123; ']
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],

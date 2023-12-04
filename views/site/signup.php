@@ -44,7 +44,7 @@ $this->title = 'Регистрация';
 
             <div class="form-group mt-2">
                 <div>
-                    <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-warning rounded-5', 'name' => 'signup-button']) ?>
                 </div>
             </div>
 

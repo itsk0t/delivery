@@ -8,53 +8,31 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
 class Orders extends ActiveRecord {
-
-    /**
-     * Метод возвращает имя таблицы БД
-     */
     public static function tableName() {
         return 'orders';
     }
 
-    /**
-     * Метод расширяет возможности класса Order, внедряя дополительные
-     * свойства и методы. Кроме того, позволяет реагировать на события,
-     * создаваемые классом Order
-     */
     public function behaviors()
     {
         return [
             [
                 'class' => TimestampBehavior::class,
                 'attributes' => [
-                    // при вставке новой записи присвоить атрибутам created
-                    // и updated значение метки времени UNIX
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created', 'updated'],
-                    // при обновлении существующей записи присвоить атрибуту
-                    // updated значение метки времени UNIX
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated'],
                 ],
-                // если вместо метки времени UNIX используется DATETIME
                 'value' => new Expression('NOW()'),
             ],
         ];
     }
 
-    /**
-     * Позволяет получить все товары заказа
-     */
     public function getItems() {
-        // связь таблицы БД `order` с таблицей `order_item`
         return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
     }
 
-    /**
-     * Правила валидации атрибутов класса при сохранении
-     */
     public function rules()
     {
         return [
-            // эти четыре поля обязательны для заполнения
             [['name', 'phone', 'comments', 'address_id'], 'required'],
             [['amount', 'status'], 'integer'],
             [['comments'], 'string'],
@@ -76,13 +54,8 @@ class Orders extends ActiveRecord {
         ];
     }
 
-    /**
-     * Добавляет записи в таблицу БД `order_item`
-     */
     public function addItems($basket) {
-        // получаем товары в корзине
         $products = $basket['products'];
-        // добавляем товары по одному
         foreach ($products as $product_id => $product) {
             $item = new OrderItems();
             $item->order_id = $this->id;

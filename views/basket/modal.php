@@ -1,7 +1,4 @@
 <?php
-/*
- * Корзина покупателя в модальном окне, файл views/basket/modal.php
- */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

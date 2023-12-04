@@ -20,7 +20,7 @@ $this->title = 'Акции';
                     </div>
                     <p class="card-text"><?php echo $el['body'] ?></p>
                     <p class="card-text"><?php echo $el['deadline'] ?></p>
-                    <a href="<?php echo \yii\helpers\Url::toRoute(['site/index'])?>" class="btn btn-warning">Перейти в меню</a>
+                    <a href="<?php echo \yii\helpers\Url::toRoute(['site/index'])?>" class="btn btn-warning rounded-5">Перейти в меню</a>
                 </div>
             </div>
         <?php } else {

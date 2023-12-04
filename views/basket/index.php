@@ -1,7 +1,4 @@
 <?php
-/*
- * Страница корзины покупателя, файл views/basket/index.php
- */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -13,7 +10,7 @@ $this->title = 'Корзина';
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-9">
+            <div class="col-sm-9" style="height: ">
                 <h1>Корзина</h1>
                 <div id="basket-content">
                     <?php if (!empty($basket)): ?>
@@ -30,7 +27,7 @@ $this->title = 'Корзина';
                                     Yii::$app->request->csrfToken
                                 );
                                 ?>
-                                <table class="table table-bordered">
+                                <table class="table table-bordered rounded-3">
                                     <tr>
                                         <th>Наименование</th>
                                         <th>Кол-во, шт.</th>
@@ -64,8 +61,7 @@ $this->title = 'Корзина';
                                     <?php endforeach; ?>
                                     <tr>
                                         <td>
-                                            <button type="submit"
-                                                    class="btn btn-primary">
+                                            <button type="submit" class="btn btn-primary rounded-5">
                                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                                                 Пересчитать
                                             </button>
@@ -83,7 +79,7 @@ $this->title = 'Корзина';
                 </div>
                 <?php if (!empty($basket)): ?>
                     <a href="<?= Url::to(['order/checkout']); ?>"
-                       class="btn btn-warning pull-right">
+                       class="btn btn-warning rounded-5 pull-right">
                         Оформить заказ
                     </a>
                 <?php endif; ?>

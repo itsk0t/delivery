@@ -18,7 +18,7 @@ $this->title = 'Меню';
                     <div class="card-body d-flex justify-content-between flex-column ">
                         <h5 class="card-title text-center h3"><?php echo $el['name'] ?></h5>
                         <div>
-                            <a href="<?php echo \yii\helpers\Url::toRoute(['site/products', 'id' => $el['id']]) ?>" class="btn btn-warning w-100  mt-2">Перейти</a>
+                            <a href="<?php echo \yii\helpers\Url::toRoute(['site/products', 'id' => $el['id']]) ?>" class="btn btn-warning w-100  mt-2 rounded-5">Перейти</a>
                         </div>
                     </div>
                 </div>

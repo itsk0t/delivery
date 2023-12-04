@@ -1,17 +1,9 @@
 <?php
-/*
- * Страница оформления заказа, файл views/order/checkout.php
- */
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/*
- * Если данные формы не прошли валидацию, получаем из сессии сохраненные
- * данные, чтобы заполнить ими поля формы, не заставляя пользователя
- * заполнять форму повторно
- */
 $name = '';
 $email = '';
 $phone = '';
@@ -74,7 +66,7 @@ $this->title = 'Оформление заказа';
 
                         echo Html::submitButton(
                             'Оформить заказ',
-                            ['class' => 'btn btn-primary']
+                            ['class' => 'btn btn-warning rounded-5']
                         );
                         ActiveForm::end();
                         ?>

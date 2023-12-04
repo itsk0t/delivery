@@ -33,7 +33,7 @@ $this->title = 'Личный кабинет';
                         <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="<?php echo $item->getColor() ?>" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar" style="width: <?php echo $item->getColor() ?>%"></div>
                         </div>
-                        <button type="button" class="btn btn-danger mt-4">&#215; Отказаться</button>
+                        <button type="button" class="btn btn-danger mt-4 rounded-5">&#215; Отказаться</button>
                     <?php } else { ?>
                         <div class="card text-bg<?php echo $item->getColor() ?> mb-3" style="max-width: 18rem;">
                             <div class="card-body">
@@ -69,7 +69,7 @@ $this->title = 'Личный кабинет';
 
 
 <!--Модальное окно-->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-warning rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Добавить адрес
 </button>
 

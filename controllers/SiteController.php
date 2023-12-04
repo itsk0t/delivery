@@ -75,13 +75,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $category = Category::find()->all();
-//        $count = clone $query;
-//        $pages = new Pagination(['totalCount'=>$count->count(), 'pageSize'=>4]);
-//
-//        $category = $query->offset($pages->offset)
-//            ->limit($pages->limit)
-//            ->all();
-        return $this->render('index', ['category'=>$category/*, 'pages'=>$pages*/]);
+        return $this->render('index', ['category'=>$category]);
     }
 
     /**
